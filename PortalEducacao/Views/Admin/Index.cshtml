@@ -1,0 +1,17 @@
+﻿<span>Importar IES </span>
+<div class="course-finder-full clearfix">
+    <div class="course-finder-full-form">
+        @using (Html.BeginForm("CarregarDadosIES", "Admin", null, FormMethod.Post, htmlAttributes: new { id = "carregaDadosIESForm" }))
+        {
+            <span>Ano:</span>
+            <input type="text" value="2012" name="ano" />
+            <input type="submit" value="Importar" class="botaoImportar" />
+                        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document.body).on('click', '.botaoImportar', function () {
+        $('.main-content-full').activity();
+    });
+</script>

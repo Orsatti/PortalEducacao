@@ -1,0 +1,47 @@
+﻿@model PagedList.IPagedList<PortalEducacao.Models.Ies>
+@using PagedList.Mvc; 
+
+@{ var ajaxOpt = new AjaxOptions { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "tabelaIes" };}
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>@Ajax.ActionLink("Ies", "Index", new { sortOrder = ViewBag.NomeSortParm, page = Model.PageNumber }, ajaxOpt)</th>
+            <th>@Ajax.ActionLink("Região", "Index", new { sortOrder = ViewBag.RegiaoSortParm, page = Model.PageNumber }, ajaxOpt)</th>
+            <th>@Ajax.ActionLink("UF", "Index", new { sortOrder = ViewBag.UFSortParm, page = Model.PageNumber }, ajaxOpt)</th>
+            <th>Município</th>
+            <th>Tipo</th>
+            <th>Org.Acadêmica</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var ies in Model)
+    {
+        <tr>
+            <td>@ies.CodigoCensoSuperior</td>
+            <td>@ies.Nome</td>
+            <td>@ies.Municipio.UF.Regiao.Nome</td>
+            <td>@ies.Municipio.UF.Sigla</td>
+            <td>@ies.Municipio.Nome</td>
+            <td>@ies.CategoriaAdministrativa.Nome</td>
+            <td>@ies.OrganizacaoAcademica.Nome</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+<div class="pagination-wrapper">
+    @if (Model.PageNumber > 1)
+    {
+        @Ajax.ActionLink("<","Index",new { page = Model.PageNumber-1, sortOrder = ViewBag.CurrentSort}, ajaxOpt) 
+    }
+
+    <a href="#" class="selected">@Model.PageNumber</a>
+    @Ajax.ActionLink((Model.PageNumber+1).ToString(),"Index",new { page = Model.PageNumber+1, sortOrder = ViewBag.CurrentSort}, ajaxOpt) 
+    @Ajax.ActionLink((Model.PageNumber+2).ToString(),"Index",new { page = Model.PageNumber+2, sortOrder = ViewBag.CurrentSort}, ajaxOpt) 
+    @Ajax.ActionLink(">", "Index", new { page = Model.PageNumber + 3, sortOrder = ViewBag.CurrentSort }, ajaxOpt) 
+</div>

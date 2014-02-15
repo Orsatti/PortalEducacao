@@ -22,22 +22,22 @@ namespace PortalEducacao.Migrations
             #endregion
 
             #region Categoria Administrativa de IES
-            var categoria1 = new CategoriaAdministrativa { Nome = "Pública Federal" };
-            var categoria2 = new CategoriaAdministrativa { Nome = "Pública Estadual" };
-            var categoria3 = new CategoriaAdministrativa { Nome = "Pública Municipal" };
-            var categoria4 = new CategoriaAdministrativa { Nome = "Privada com Fins Lucrativos" };
-            var categoria5 = new CategoriaAdministrativa { Nome = "Privada sem Fins Lucrativos" };
-            var categoria6 = new CategoriaAdministrativa { Nome = "Especial" };
+            var categoria1 = new CategoriaAdministrativa { codigoCensoSuperior = 1, Nome = "Pública Federal" };
+            var categoria2 = new CategoriaAdministrativa { codigoCensoSuperior = 2, Nome = "Pública Estadual" };
+            var categoria3 = new CategoriaAdministrativa { codigoCensoSuperior = 3, Nome = "Pública Municipal" };
+            var categoria4 = new CategoriaAdministrativa { codigoCensoSuperior = 4, Nome = "Privada com Fins Lucrativos" };
+            var categoria5 = new CategoriaAdministrativa { codigoCensoSuperior = 5, Nome = "Privada sem Fins Lucrativos" };
+            var categoria6 = new CategoriaAdministrativa { codigoCensoSuperior = 6, Nome = "Especial" };
             context.CategoriasAdministrativas.AddOrUpdate(i => new { i.Nome }, categoria1, categoria2, categoria3, categoria4, categoria5, categoria6);
             context.SaveChanges();
             #endregion
 
             #region Organização Acadêmica de IES
-            var org1 = new OrganizacaoAcademica { Nome = "Universidade" };
-            var org2 = new OrganizacaoAcademica { Nome = "Centro Universitário" };
-            var org3 = new OrganizacaoAcademica { Nome = "Faculdade" };
-            var org4 = new OrganizacaoAcademica { Nome = "Instituto Federal de Educação, Ciência e Tecnologia" };
-            var org5 = new OrganizacaoAcademica { Nome = "Centro Federal de Educação Tecnológica" };
+            var org1 = new OrganizacaoAcademica { codigoCensoSuperior = 1, Nome = "Universidade" };
+            var org2 = new OrganizacaoAcademica { codigoCensoSuperior = 2, Nome = "Centro Universitário" };
+            var org3 = new OrganizacaoAcademica { codigoCensoSuperior = 3, Nome = "Faculdade" };
+            var org4 = new OrganizacaoAcademica { codigoCensoSuperior = 4, Nome = "Instituto Federal de Educação, Ciência e Tecnologia" };
+            var org5 = new OrganizacaoAcademica { codigoCensoSuperior = 5, Nome = "Centro Federal de Educação Tecnológica" };
             context.OrganizacoesAcademicas.AddOrUpdate(i => new { i.Nome }, org1, org2, org3, org4, org5);
             context.SaveChanges();
             #endregion

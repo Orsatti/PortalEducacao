@@ -13,6 +13,8 @@ namespace PortalEducacao.Models
     {
         public int MunicipioID { get; set; }
 
+        public int? codigoSensoSuperior { get; set; }
+
         [Required(ErrorMessage = "Nome da município é obrigatório.")]
         [MaxLength(150)]
         public string Nome { get; set; }

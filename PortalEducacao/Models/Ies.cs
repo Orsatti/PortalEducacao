@@ -11,6 +11,9 @@ namespace PortalEducacao.Models
         // Chave Primária
         public int IesID {get; set;}
 
+        // Se veio do Censo do Ensino Superior, indica o ano
+        public int? AnoCensoSuperior { get; set; }
+
         // Código no CensoEnsinoSuperior
         public int? CodigoCensoSuperior { get; set; }
 
@@ -29,12 +32,6 @@ namespace PortalEducacao.Models
 
         // Municipio
         public int? MunicipioID { get; set; }
-
-        // Código do Município no CensoEnsinoSuperior
-        public int? CodigoMunicipioCensoSuperior { get; set; }
-
-        // Código da UF no CensoEnsinoSuperior
-        public int? CodigoUFCensoSuperior { get; set; }
 
         // Propriedades de navegação
         public virtual CategoriaAdministrativa CategoriaAdministrativa { get; set; }

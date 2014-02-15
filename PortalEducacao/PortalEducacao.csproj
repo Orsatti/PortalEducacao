@@ -46,7 +46,17 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -185,8 +195,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IesController.cs" />
+    <Compile Include="DAL\ImportCensoSuperior.cs" />
     <Compile Include="DAL\PEContext.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -200,18 +212,34 @@
     <Compile Include="Migrations\201402091442026_IESAdded.Designer.cs">
       <DependentUpon>201402091442026_IESAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201402151657528_correcoes.cs" />
+    <Compile Include="Migrations\201402151657528_correcoes.Designer.cs">
+      <DependentUpon>201402151657528_correcoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402151700172_CodigosAdded.cs" />
+    <Compile Include="Migrations\201402151700172_CodigosAdded.Designer.cs">
+      <DependentUpon>201402151700172_CodigosAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402151735009_regiaoAdded.cs" />
+    <Compile Include="Migrations\201402151735009_regiaoAdded.Designer.cs">
+      <DependentUpon>201402151735009_regiaoAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CategoriaAdministrativa.cs" />
     <Compile Include="Models\Ies.cs" />
     <Compile Include="Models\Municipio.cs" />
     <Compile Include="Models\OrganizacaoAcademica.cs" />
+    <Compile Include="Models\Regiao.cs" />
     <Compile Include="Models\UF.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Erro.cs" />
+    <Compile Include="ViewModels\IesData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\CensoSuperior2012\INSTITUICAO.txt" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Dados\CensoSuperior2012\INSTITUICAO.txt" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -376,6 +404,8 @@
     <Content Include="Images\toggle_plus.png" />
     <Content Include="js\jquery-1.9.1.js" />
     <Content Include="js\jquery-ui.js" />
+    <Content Include="js\jquery.activity-indicator-1.0.0.js" />
+    <Content Include="js\jquery.activity-indicator-1.0.0.min.js" />
     <Content Include="js\jquery.flexslider-min.js" />
     <Content Include="js\jquery.prettyPhoto.js" />
     <Content Include="js\jquery.uniform.js" />
@@ -383,6 +413,8 @@
     <Content Include="js\selectivizr-min.js" />
     <Content Include="js\superfish.js" />
     <Content Include="js\tinynav.min.js" />
+    <Content Include="Libs\log4net.dll" />
+    <Content Include="log4netConfig.xml" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -437,8 +469,14 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Ies\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\ResumoImportacao.cshtml" />
+    <Content Include="Views\Ies\_tabelaIes.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Log\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -448,6 +486,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201402091442026_IESAdded.resx">
       <DependentUpon>201402091442026_IESAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402151657528_correcoes.resx">
+      <DependentUpon>201402151657528_correcoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402151700172_CodigosAdded.resx">
+      <DependentUpon>201402151700172_CodigosAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402151735009_regiaoAdded.resx">
+      <DependentUpon>201402151735009_regiaoAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

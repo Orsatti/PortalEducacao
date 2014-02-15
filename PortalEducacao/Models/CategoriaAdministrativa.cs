@@ -13,6 +13,8 @@ namespace PortalEducacao.Models
     {
         public int CategoriaAdministrativaID { get; set; }
 
+        public int codigoCensoSuperior { get; set; }
+
         [Required(ErrorMessage = "Nome da categoria é obrigatório.")]
         [MaxLength(50)]
         public string Nome { get; set; }
